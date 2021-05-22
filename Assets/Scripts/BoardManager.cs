@@ -20,7 +20,7 @@ public class BoardManager : MonoBehaviour
             maximum = max;
         }
     }
-     // Establish grid format of actual gameboard
+     // Establish deminsional grid format of actual gameboard
     public int columns = 8;
     public int rows = 8;
     public Count wallCount = new Count(5, 9);
@@ -46,18 +46,20 @@ public class BoardManager : MonoBehaviour
         // Looping from 1 to -1 so that there can be a border of floor tiles directly within the outer walls. Creates levels that aren't completely impassable
         for (int x = 1; x < columns - 1; x++)
         {
-            for (int y = 1; x < rows - 1; y++)
+            for (int y = 1; y < rows - 1; y++)
             {
                 gridPositions.Add(new Vector3(x, y, 0f))
 ;           }
         }
     }
 
+    // Setup outerwall and floor of the game board
     void BoardSetup ()
     {
+        // create new GameObject called 'Board' with transform properties. Reference as 'boardHolder'.
         boardHolder = new GameObject("Board").transform;
 
-        // Used to build an edge of the playable board using the outerwall objects
+        // x = -1 and y = -1 to establish the edge around the active portion of the gameboard using outerwall objects
         for (int x = -1; x < columns + 1; x++)
         {
             for (int y = -1; y < rows + 1; y++)
@@ -77,15 +79,48 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    Vector3 RandomPosition()
     {
-        
+        // generate random index from 0 to available grid positions through gridPositions.Count
+        int randomIndex = Random.Range(0, gridPositions.Count);
+        // store the randomIndex in a randomPosition as a Vector3
+        Vector3 randomPosition = gridPositions[randomIndex];
+        // prevents two objects being spawned in the same location.
+        gridPositions.RemoveAt(randomIndex);
+        return randomPosition;
     }
 
-    // Update is called once per frame
-    void Update()
+    // function to spawn tile at the chosen random position
+    void LayoutObjectAtRandom(GameObject[] tileArray, int minimum, int maximum)
     {
-        
+        // controls how many of a given object will spawn
+        int objectCount = Random.Range(minimum, maximum + 1);
+
+        // spawn number of objects specified by objectCount
+        for (int i = 0; i < objectCount; i++)
+        {
+            // 
+            Vector3 randomPosition = RandomPosition();
+            // assign a random tile to tileChoice as GameObject
+            GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
+            // create instance of tileChoice at a randomPosition without rotation (Quaternion.identity)
+            Instantiate(tileChoice, randomPosition, Quaternion.identity);
+        }
+    }
+
+    // only public function of the class
+    // will be called GameManager when it's time to setup the board
+    public void SetupScene(int level)
+    {
+        BoardSetup();
+        InitializeList();
+        LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
+        LayoutObjectAtRandom(foodTiles, foodCount.minimum, foodCount.maximum);
+        // generate number of enemies based on the level number. Utilizes logarithmic progression scale. Mathf.Log returns a float, and is now cast to an int
+        int enemyCount = (int)Mathf.Log(level, 2f);
+        // min and max vals are the same due to not specifying a random range
+        LayoutObjectAtRandom(enemyTiles, enemyCount, enemyCount);
+        // instance exit. Will always be in the upper right corner in this game.
+        Instantiate(exit, new Vector3(columns - 1, rows - 1, 0F), Quaternion.identity);
     }
 }
