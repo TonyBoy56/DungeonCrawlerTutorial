@@ -23,7 +23,9 @@ public class BoardManager : MonoBehaviour
      // Establish deminsional grid format of actual gameboard
     public int columns = 8;
     public int rows = 8;
+    // Specify random range for how many walls we want to spawn in each level
     public Count wallCount = new Count(5, 9);
+    // Specify random range for how many food items we want to spawn in each level
     public Count foodCount = new Count(1, 5);
     public GameObject exit;
     // use arrays to pass in multiple tiles to parse through and appear on the gameboard
@@ -43,7 +45,7 @@ public class BoardManager : MonoBehaviour
         gridPositions.Clear();
 
         // Create list of possible positions to place walls, enemies, or pickups
-        // Looping from 1 to -1 so that there can be a border of floor tiles directly within the outer walls. Creates levels that aren't completely impassable
+        // Looping from 1 to col/row -1 so that there can be a border of floor tiles directly within the outer walls. Creates levels that aren't completely impassable
         for (int x = 1; x < columns - 1; x++)
         {
             for (int y = 1; y < rows - 1; y++)
