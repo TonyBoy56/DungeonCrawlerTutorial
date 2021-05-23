@@ -35,7 +35,7 @@ public class BoardManager : MonoBehaviour
     public GameObject[] enemyTiles;
     public GameObject[] outerWallTiles;
 
-    // Keep clean hierarchy. Will be spawning in multiple game objects as children of boardHolder;
+    // Keep clean hierarchy. Will be spawning in multiple objects as instances of boardHolder;
     private Transform boardHolder;
     // Track all possible positions on the gameboard. Track if object can be spawned on that position or not.
     private List<Vector3> gridPositions = new List<Vector3>();
@@ -46,6 +46,7 @@ public class BoardManager : MonoBehaviour
 
         // Create list of possible positions to place walls, enemies, or pickups
         // Looping from 1 to col/row -1 so that there can be a border of floor tiles directly within the outer walls. Creates levels that aren't completely impassable
+        // attribute - 1 because we don't want new tiles to spawn on the outerwall tiles
         for (int x = 1; x < columns - 1; x++)
         {
             for (int y = 1; y < rows - 1; y++)
