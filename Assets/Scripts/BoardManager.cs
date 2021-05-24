@@ -70,10 +70,9 @@ public class BoardManager : MonoBehaviour
                 GameObject toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)];
                 if (x == -1 || x == columns || y == -1 || y == rows)
                 {
-                    toInstantiate = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
-
-                    // Quaternion.identity because we want to instantiate without rotation
                     // as GameObject so that it is passed to a GameObject
+                    // Quaternion.identity because we want to instantiate without rotation
+                    toInstantiate = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
                     GameObject instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
                     instance.transform.SetParent(boardHolder);
                 }

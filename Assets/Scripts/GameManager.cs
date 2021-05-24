@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
             // GameManager is referred to as gameObject
             Destroy(gameObject);
         }
+
         // when a new scene is loaded, normally all gameObjects in the heirarchy are destroyed. 
         // We want to use the GameManager to keep track of score between scenes
         // DontDestroyOnLoad allows gameObjects to persist between loaded scenes.
