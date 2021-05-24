@@ -51,7 +51,7 @@ public class BoardManager : MonoBehaviour
         {
             for (int y = 1; y < rows - 1; y++)
             {
-                gridPositions.Add(new Vector3(x, y, 0f))
+                gridPositions.Add(new Vector3(x, y, 0f));
 ;           }
         }
     }
@@ -75,7 +75,11 @@ public class BoardManager : MonoBehaviour
                     // Quaternion.identity because we want to instantiate without rotation
                     // as GameObject so that it is passed to a GameObject
                     GameObject instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
-
+                    instance.transform.SetParent(boardHolder);
+                }
+                else
+                {
+                    GameObject instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
                     instance.transform.SetParent(boardHolder);
                 }
             }
