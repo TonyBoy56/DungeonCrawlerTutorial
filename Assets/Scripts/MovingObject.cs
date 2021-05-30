@@ -31,6 +31,7 @@ public abstract class MovingObject : MonoBehaviour
         inverseMoveTime = 1f / moveTime;
     }
 
+    // establish movement system
     protected bool Move(int xDir, int yDir, out RaycastHit2D hit)
     {
         Vector2 start = transform.position;
@@ -51,9 +52,12 @@ public abstract class MovingObject : MonoBehaviour
         }
     }
 
+    // specify the type of component we expect our unit to interact with if blocked
     protected virtual void AttemptMove<T>(int xDir, int yDir)
+        // component specification
         where T : Component
     {
+        // specifies type information of object being hit by "sonar" like laser
         RaycastHit2D hit;
         bool canMove = Move(xDir, yDir, out hit);
 
@@ -89,6 +93,7 @@ public abstract class MovingObject : MonoBehaviour
         }
     }
 
+    // utilize in enemy and player scripts?
     protected abstract void OnCantMove<T>(T component)
         where T : Component;
 }
