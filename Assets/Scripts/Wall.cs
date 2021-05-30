@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-
     public Sprite dmgSprite;
     // Start is called before the first frame update
     void Start()
