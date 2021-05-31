@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public float restartLevelDelay = 1f;
 
     private Animator animator;
+    private int food;
     // Start is called before the first frame update
     void Start()
     {
