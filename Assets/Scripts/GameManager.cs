@@ -42,6 +42,12 @@ public class GameManager : MonoBehaviour
         boardScript.SetupScene(level);
     }
 
+    // disable GameManager
+    public void GameOver()
+    {
+        enabled = false;
+    }
+
     // Update is called once per frame
     void Update ()
     {
