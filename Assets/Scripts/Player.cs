@@ -20,7 +20,7 @@ public class Player : MovingObject
         // set food to value of playerFoodPoints
         food = GameManager.instance.playerFoodPoints;
 
-
+        base.Start();
     }
 
     // Update is called once per frame
