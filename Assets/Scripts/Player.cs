@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private Animator animator;
     private int food;
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         
     }
