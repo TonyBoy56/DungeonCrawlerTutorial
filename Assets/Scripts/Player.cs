@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public int wallDamage = 1;
     public int pointsPerFood = 10;
+    public int pointsPerSoda = 20;
     // Start is called before the first frame update
     void Start()
     {
