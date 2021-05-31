@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     public int pointsPerFood = 10;
     public int pointsPerSoda = 20;
     public float restartLevelDelay = 1f;
+
+    private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
