@@ -23,6 +23,13 @@ public class Player : MovingObject
         base.Start();
     }
 
+    // part of Unity API
+    // store value of food in the GM as we change levels
+    private void OnDisable()
+    {
+        GameManager.instance.playerFoodPoints = food;
+    }
+
     // Update is called once per frame
     void Update()
     {
