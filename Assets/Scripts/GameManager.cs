@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     // static will declare the variable will belong to the class itself rather than an instance of the class.
     public static GameManager instance = null;
     public BoardManager boardScript;
+    public int playerFoodPoints = 100;
+    // though public, it won't be displayed in the editor
+    [HideInInspector] public bool playersTurn = true;
 
     private int level = 3;
 
@@ -37,6 +40,12 @@ public class GameManager : MonoBehaviour
     void InitGame ()
     {
         boardScript.SetupScene(level);
+    }
+
+    // disable GameManager
+    public void GameOver()
+    {
+        enabled = false;
     }
 
     // Update is called once per frame
