@@ -13,11 +13,6 @@ public class Player : MovingObject
     private Animator animator;
     private int food;
 
-    protected override void OnCantMove<T>(T component)
-    {
-        throw new System.NotImplementedException();
-    }
-
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -57,6 +52,13 @@ public class Player : MovingObject
         {
             AttemptMove<Wall>(horizontal, vertical);
         }
+    }
+
+    protected override void OnCantMove <T> (T component)
+    {
+        Wall hitWall = component as Wall;
+        hitWall.DamageWall(wallDamage);
+        animator.SetTrigger("playerChop");
     }
 
     // note: create modification to also check GameOver on current life-count/health
