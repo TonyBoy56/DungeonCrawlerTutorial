@@ -51,4 +51,13 @@ public class Player : MovingObject
             GameManager.instance.GameOver();
         }
     }
+
+    protected override void AttemptMove<T>(int xDir, int yDir)
+    {
+        food -= 1;
+        base.AttemptMove<T>(xDir, yDir);
+        RaycastHit2D hit;
+        CheckIfGameOver();
+        GameManager.instance.playersTurn = false;
+    }
 }
