@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MovingObject
 {
@@ -59,6 +60,13 @@ public class Player : MovingObject
         Wall hitWall = component as Wall;
         hitWall.DamageWall(wallDamage);
         animator.SetTrigger("playerChop");
+    }
+
+    // reload the level if the player collides with the exit object.
+    private void Restart()
+    {
+        //Application.LoadLevel(Application.loadedLevel);
+        //SceneManager.LoadScene(sceneName: "Main:");
     }
 
     // note: create modification to also check GameOver on current life-count/health
