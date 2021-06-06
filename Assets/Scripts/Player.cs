@@ -37,10 +37,26 @@ public class Player : MovingObject
         GameManager.instance.playerFoodPoints = food;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+        // if *it is* the players turn, we will follow through with the rest of the code block. If not, exit the statement.
+        if (!GameManager.instance.playersTurn) return;
+
+        int horizontal = 0;
+        int vertical = 0;
+
+        horizontal = (int)Input.GetAxisRaw("Horizontal");
+        vertical = (int)Input.GetAxisRaw("Vertical");
+
+        if (horizontal != 0)
+        {
+            vertical = 0;
+        }
+        if (horizontal != 0 || vertical != 0)
+        {
+            AttemptMove<Wall>(horizontal, vertical);
+        }
     }
 
     // note: create modification to also check GameOver on current life-count/health
