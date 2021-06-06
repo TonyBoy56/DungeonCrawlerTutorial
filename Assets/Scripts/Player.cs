@@ -23,15 +23,17 @@ public class Player : MovingObject
     {
         animator = GetComponent<Animator>();
         // set food to value of playerFoodPoints
+        // store value of food in the GM as we change levels
         food = GameManager.instance.playerFoodPoints;
 
         base.Start();
     }
 
     // part of Unity API
-    // store value of food in the GM as we change levels
+    // occurs when the player dies, or is disabled
     private void OnDisable()
     {
+        // store value of food into the GameManager as levels change.
         GameManager.instance.playerFoodPoints = food;
     }
 
@@ -39,5 +41,14 @@ public class Player : MovingObject
     void Update()
     {
         
+    }
+
+    // note: create modification to also check GameOver on current life-count/health
+    private void CheckIfGameOver()
+    {
+        if (food <= 0)
+        {
+            GameManager.instance.GameOver();
+        }
     }
 }
