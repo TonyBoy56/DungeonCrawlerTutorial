@@ -13,6 +13,7 @@ public class Player : MovingObject
     // type specification
     private Animator animator;
     private int food;
+    //private int vitality;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -71,6 +72,13 @@ public class Player : MovingObject
         SceneManager.LoadScene(loadedScene.name);
     }
 
+    public void LoseFood (int loss)
+    {
+        animator.SetTrigger("playerHit");
+        food -= loss;
+        CheckIfGameOver();
+    }
+
     // note: create modification to also check GameOver on current life-count/health
     private void CheckIfGameOver()
     {
@@ -78,6 +86,7 @@ public class Player : MovingObject
         {
             GameManager.instance.GameOver();
         }
+        // check on health goes here
     }
 
     protected override void AttemptMove<T>(int xDir, int yDir)
