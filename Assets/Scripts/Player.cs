@@ -67,6 +67,8 @@ public class Player : MovingObject
     {
         //Application.LoadLevel(Application.loadedLevel);
         //SceneManager.LoadScene(sceneName: "Main:");
+        Scene loadedScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(loadedScene.name);
     }
 
     // note: create modification to also check GameOver on current life-count/health
