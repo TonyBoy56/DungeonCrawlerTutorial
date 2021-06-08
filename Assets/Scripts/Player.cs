@@ -72,6 +72,26 @@ public class Player : MovingObject
         SceneManager.LoadScene(loadedScene.name);
     }
 
+    // interact other with objects on the board
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Exit")
+        {
+            Invoke("Restart", restartLevelDelay);
+            enabled = false;
+        }
+        else if (other.tag == "Food")
+        {
+            food += pointsPerFood;
+            other.gameObject.SetActive(false);
+        }
+        else if (other.tag == "Soda")
+        {
+            food += pointsPerSoda;
+            other.gameObject.SetActive(false);
+        }
+    }
+
     public void LoseFood (int loss)
     {
         animator.SetTrigger("playerHit");
