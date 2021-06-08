@@ -27,6 +27,7 @@ public class BoardManager : MonoBehaviour
     public Count wallCount = new Count(5, 9);
     // Specify random range for how many food items we want to spawn in each level
     public Count foodCount = new Count(1, 5);
+    // public Count healthCount = new Count(1, 5);
     public GameObject exit;
     // use arrays to pass in multiple tiles to parse through and appear on the gameboard
     public GameObject[] floorTiles;
