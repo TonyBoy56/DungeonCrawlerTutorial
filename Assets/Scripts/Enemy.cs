@@ -12,9 +12,12 @@ public class Enemy : MovingObject
     private Transform target;
     private bool skipMove;
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        
+        // grab stored component reference to the animator
+        animator = GetComponent<Animator>();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+        base.Start();
     }
 
     // Update is called once per frame
