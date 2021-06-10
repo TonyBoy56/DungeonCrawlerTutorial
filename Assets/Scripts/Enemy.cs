@@ -38,8 +38,8 @@ public class Enemy : MovingObject
 
         base.AttemptMove<T>(xDir, yDir);
         skipMove = true;
-
     }
+
 
     protected override void OnCantMove<T>(T component)
     {
