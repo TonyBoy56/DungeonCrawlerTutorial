@@ -11,19 +11,13 @@ public class Enemy : MovingObject
     private Animator animator;
     private Transform target;
     private bool skipMove;
-    // Start is called before the first frame update
+
     protected override void Start()
     {
         // grab stored component reference to the animator
         animator = GetComponent<Animator>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         base.Start();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     // takes generic param <T> of any component type
@@ -62,6 +56,10 @@ public class Enemy : MovingObject
 
     protected override void OnCantMove<T>(T component)
     {
-        throw new System.NotImplementedException();
+        Player hitPlayer = component as Player;
+
+        // account for health bar here as mod
+
+        hitPlayer.LoseFood(playerDamage);
     }
 }
