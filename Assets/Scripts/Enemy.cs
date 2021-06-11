@@ -40,6 +40,25 @@ public class Enemy : MovingObject
         skipMove = true;
     }
 
+    public void MoveEnemy()
+    {
+        int xDir = 0;
+        int yDir = 0;
+
+        // calc position of the player against position of the enemy
+        // return absolute value of f if less than, or roughly the same, as Epsilon
+        if (Mathf.Abs(target.position.x - transform.position.x) < float.Epsilon)
+        {
+            // +1 move up, -1 move down
+            yDir = target.position.y > transform.position.y ? 1 : -1;
+        }
+        else
+        {
+            // +1 move right, -1 move left
+            xDir = target.position.x > transform.position.x ? 1 : -1;
+        }
+        AttemptMove<Player>(xDir, yDir);
+    }
 
     protected override void OnCantMove<T>(T component)
     {
